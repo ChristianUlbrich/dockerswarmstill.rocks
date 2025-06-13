@@ -64,4 +64,4 @@ jobs:
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
-          VERSION=${{ inputs.version }} docker stack deploy -c docker-compose.yml ${{ inputs.stack }}
+          VERSION=${{ inputs.version }} docker stack deploy -c docker-compose.yml --with-registry-auth --prune ${{ inputs.stack }}

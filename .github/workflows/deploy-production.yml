@@ -56,7 +56,7 @@ jobs:
       version: ${{ needs.get-latest-tag.outputs.tag }}
 
   call-deploy-stack:
-    needs: call-build-images
+    needs: [get-latest-tag, call-build-images]
     uses: ./.github/workflows/deploy-stack.yml
     with:
       version: ${{ needs.get-latest-tag.outputs.tag }}
