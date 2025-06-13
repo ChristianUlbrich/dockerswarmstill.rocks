@@ -36,11 +36,14 @@ jobs:
 
     steps:
       - name: Set up SSH key for Docker Swarm Manager host
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.DOCKER_SWARM_MANAGER_SSH_KEY }}" > ~/.ssh/docker_host_key
           chmod 600 ~/.ssh/docker_host_key
           ssh-keyscan -H "${{ secrets.DOCKER_SWARM_MANAGER_HOST }}" >> ~/.ssh/known_hosts
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
           ssh-add ~/.ssh/docker_host_key
 
       - name: Set DOCKER_HOST env
