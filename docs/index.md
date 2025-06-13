@@ -10,7 +10,7 @@
 
 **This website is undeprecated.**
 
-It has been updated with some current recipes, because _Docker Swarm still rocks_. :)
+It has been updated with some current recipes, because _Docker Swarm still rocks_. 😎
 
 See [Docker Swarm Mode or Kubernetes](swarm-or-kubernetes.md) for more information.
 
@@ -60,13 +60,15 @@ To use any of them you need to learn a huge new set of concepts, configurations,
 
 Docker Swarm mode is comparable to them.
 
-But it, with all the ideas described here, is what I would recommend for teams of **less than 200 developers**, or clusters of **less than 1000 machines**.
+But it has simpler concepts and its requirements are very low. You can easily set it up on any VPS running Docker.
 
-This includes **small / medium size organizations** (like when you are not Google or Amazon), **startups**, one-man projects, and "hobby" projects.
+Take things back into your own hands! Docker Swarm is a very good fit, if you _just want to deploy_ some containers.
 
 Try it.
 
-Set up a distributed cluster ready for production.
+Set up a distributed cluster ready for "production".
+
+> **Hint:** Distributed cluster, does not mean _high availability_.
 
 ...In about **20 minutes**.
 

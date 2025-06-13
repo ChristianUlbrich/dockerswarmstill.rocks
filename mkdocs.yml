@@ -60,7 +60,7 @@ plugins:
   social:
 
 nav:
-    - Docker Swarm Rocks: index.md
+    - Docker Swarm Still Rocks: index.md
     - swarm-or-kubernetes.md
     - traefik.md
     - portainer.md
@@ -116,17 +116,15 @@ markdown_extensions:
 extra:
   social:
   - icon: fontawesome/brands/github-alt
-    link: https://github.com/tiangolo/dockerswarm.rocks
-  - icon: fontawesome/brands/twitter
-    link: https://twitter.com/tiangolo
+    link: https://github.com/christianulbrich/dockerswarmstill.rocks
   - icon: fontawesome/brands/linkedin
-    link: https://www.linkedin.com/in/tiangolo
-  - icon: fontawesome/brands/dev
-    link: https://dev.to/tiangolo
-  - icon: fontawesome/brands/medium
-    link: https://medium.com/@tiangolo
-  - icon: fontawesome/solid/globe
-    link: https://tiangolo.com
+    link: https://www.linkedin.com/in/only-christianulbrich
+#  - icon: fontawesome/brands/dev
+#    link: https://dev.to/christianulbrich
+#  - icon: fontawesome/brands/medium
+#    link: https://medium.com/@christianulbrich
+#  - icon: fontawesome/solid/globe
+#    link: https://zalari.de
 
 extra_css:
   - css/termynal.css
