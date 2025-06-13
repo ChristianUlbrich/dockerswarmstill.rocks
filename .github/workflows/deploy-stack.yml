@@ -1,0 +1,47 @@
+name: Deploy Stack
+on:
+  workflow_call:
+    inputs:
+      version:
+        required: true
+        type: string
+      stage:
+        required: true
+        type: string
+      deployUrl:
+        required: true
+        type: string
+      deployUrl:
+        required: true
+        type: string
+    secrets:
+      DOCKER_SWARM_MANAGER_SSH_KEY:
+        required: true
+      DOCKER_SWARM_MANAGER_HOST:
+        required: true
+
+permissions:
+  deployments: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.stage }}
+      url: ${{ inputs.deployUrl }}
+
+    steps:
+      - name: Set up SSH key for Docker Swarm Manager host
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DOCKER_SWARM_MANAGER_SSH_KEY }}" > ~/.ssh/docker_host_key
+          chmod 600 ~/.ssh/docker_host_key
+          ssh-keyscan -H "${{ secrets.DOCKER_SWARM_MANAGER_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Set DOCKER_HOST env
+        run: echo "DOCKER_HOST=ssh://${{ secrets.DOCKER_SWARM_MANAGER_HOST }}" >> $GITHUB_ENV
+
+      - name: Docker stack deploy
+        run: |
+          export
+          docker stack deploy -c docker-compose.yml mystack

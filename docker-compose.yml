@@ -6,6 +6,8 @@ services:
     build:
       dockerfile: builder.Dockerfile
       context: .
+      platforms:
+        - 'linux/arm64'
     # small hack to prevent it from deploying
     deploy:
       replicas: 0
@@ -15,9 +17,13 @@ services:
 
   service:
     image: ghcr.io/christianulbrich/dockerswarmstillrocks-website:${VERSION:-latest}
+    depends_on:
+      - builder
     build:
       dockerfile: service.Dockerfile
       context: .
+      platforms:
+        - 'linux/arm64'
     deploy:
       labels:
         - "traefik.enable=true"

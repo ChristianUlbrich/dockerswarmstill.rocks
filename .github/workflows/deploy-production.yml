@@ -1,29 +1,30 @@
-name: Deploy Docs
+name: Deploy Stack
 on:
   workflow_run:
     workflows:
-      - Build Docs
+      - Build Images
     types:
       - completed
 
 permissions:
   deployments: write
-  issues: write
-  pull-requests: write
-  statuses: write
-
-env:
-  UV_SYSTEM_PYTHON: 1
 
 jobs:
-  deploy-docs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: Production
+      url: https://dockerswarmstill.rocks
+  deploy-stack:
     runs-on: ubuntu-latest
     steps:
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
+
       - uses: actions/checkout@v4
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
