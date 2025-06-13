@@ -3,14 +3,14 @@
 </style>
 
 <p align="center">
-  <a href="https://dockerswarm.rocks"><img src="https://dockerswarm.rocks/img/logo-light-blue-vectors.svg" alt="dockerswarm.rocks"></a>
+  <a href="https://dockerswarmstill.rocks"><img src="https://dockerswarmstill.rocks/img/logo-light-blue-vectors.svg" alt="dockerswarmstill.rocks"></a>
 </p>
 
-## Deprecation Warning 🚨
+## Undeprecation Warning 🚨
 
-**This website is deprecated.**
+**This website is undeprecated.**
 
-It's kept around mainly for historical reasons.
+It has been updated with some current recipes, because _Docker Swarm still rocks_. :)
 
 See [Docker Swarm Mode or Kubernetes](swarm-or-kubernetes.md) for more information.
 

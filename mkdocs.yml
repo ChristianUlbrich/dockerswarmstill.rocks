@@ -1,8 +1,8 @@
 INHERIT: ./mkdocs.maybe-insiders.yml
-site_name: Docker Swarm Rocks
+site_name: Docker Swarm Still Rocks
 site_description: Docker Swarm mode ideas and tools
 
-site_url: https://dockerswarm.rocks
+site_url: https://dockerswarmstill.rocks
 theme:
   name: material
   palette:
@@ -52,8 +52,8 @@ theme:
   logo: img/icon-white.svg
   favicon: img/favicon.png
   language: en
-repo_name: tiangolo/dockerswarm.rocks
-repo_url: https://github.com/tiangolo/dockerswarm.rocks
+repo_name: christianulbrich/dockerswarmstill.rocks
+repo_url: https://github.com/ChristianUlbrich/dockerswarmstill.rocks
 plugins:
   # Material for MkDocs
   search:
