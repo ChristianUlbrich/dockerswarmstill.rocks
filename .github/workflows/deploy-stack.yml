@@ -49,7 +49,9 @@ jobs:
         run: |
           docker login ghcr.io -u ${{ github.repository_owner }} -p ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
       - name: Docker stack deploy on remote host
         run: |
-          export
           docker stack deploy -c docker-compose.yml ${{ inputs.stack }}
