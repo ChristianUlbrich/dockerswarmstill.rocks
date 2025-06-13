@@ -1,0 +1,9 @@
+*
+!docs
+!scripts
+!mkdocs.yml
+!mkdocs.insiders.yml
+!mkdocs.maybe-insiders.yml
+!mkdocs.no-insiders.yml
+!requirements-docs.txt
+!requirements-docs-insiders.txt
