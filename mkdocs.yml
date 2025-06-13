@@ -63,17 +63,8 @@ nav:
     - Docker Swarm Rocks: index.md
     - swarm-or-kubernetes.md
     - traefik.md
-    - swarmpit.md
-    - swarmprom.md
     - portainer.md
-    - thelounge.md
     - gitlab-ci.md
-    - Traefik v1 (previous/obsolete guides):
-        - traefik-v1/index.md
-        - traefik-v1/traefik.md
-        - traefik-v1/traefik-technical-details.md
-        - traefik-v1/traefik-with-volume.md
-    - project-generators.md
     - release-notes.md
 
 markdown_extensions:
