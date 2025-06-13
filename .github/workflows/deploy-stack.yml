@@ -11,7 +11,7 @@ on:
       deployUrl:
         required: true
         type: string
-      deployUrl:
+      stack:
         required: true
         type: string
     secrets:
@@ -41,7 +41,11 @@ jobs:
       - name: Set DOCKER_HOST env
         run: echo "DOCKER_HOST=ssh://${{ secrets.DOCKER_SWARM_MANAGER_HOST }}" >> $GITHUB_ENV
 
-      - name: Docker stack deploy
+      - name: Login to GitHub Container Registry on remote host
+        run: |
+          docker login ghcr.io -u ${{ github.repository_owner }} -p ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Docker stack deploy on remote host
         run: |
           export
-          docker stack deploy -c docker-compose.yml mystack
+          docker stack deploy -c docker-compose.yml ${{ inputs.stack }}
