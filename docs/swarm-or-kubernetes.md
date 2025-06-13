@@ -1,26 +1,12 @@
 # Docker Swarm Mode or Kubernetes
 
-I was a big fan and advocate of Docker Swarm Mode.
+Docker Swarm is a robust and reliable product. Compared to Kubernetes it is way simpler to administer and it allows to keep the **same** old beloved `docker-compose.yml` (to some extent) for both _running_ Docker containers locally, as well as _deploying_ stacks.
 
-Unfortunately, it seems **Kubernetes** has the overwhelming majority of the market. 🥲
+Kubernetes is the de facto industry standard for massively, distributed computational work loads. However it entails a lot of learnings and buying managed Kubernetes is expensive compared to the simplicity of Docker Swarm.
 
-I think Docker Swarm Mode was a great product, and I didn't understand why it didn't get more adoption and kept growing.
+Docker Swarm is not a silver bullet, you still have to solve the **same** problems, that are inherent to deploying container workloads - storage, security, access to registries, etc. **but** it is much easier to learn than Kubernetes and it is built on familiar Docker concepts. It is essentially a remotely controlled Docker engine, that "simply" distributes its running containers.
 
-Right now, I think **it's not sensible to build a new product using Docker Swarm Mode**, just because there's no strong support behind it.
-
-I still think Kubernetes is overly complex for most cases, and I currently don't know of a better alternative (and I've tried several).
-
-I think deployment is not a solved problem.
-
-Maybe another abstraction layer simplifying everything is needed. Or maybe cloud services and platform as a service providers are just a better option now that the alternative is to go through the enormous complexity of Kubernetes.
-
-The safest bet right now seems to be using Kubernetes or managed cloud services, not Docker Swarm Mode.
-
-Given that, this website is *deprecated*, and kept around mainly for historical reasons.
-
-Sadly, I don't have a good alternative or set of guides to recommend or offer right now. You can follow me on [Twitter](https://twitter.com/tiangolo) or [LinkedIn](https://www.linkedin.com/in/tiangolo/) to see what else I discover in the future.
-
-Meanwhile, you could check the [awesome-swarm](https://github.com/BretFisher/awesome-swarm) list for more resources about Docker Swarm Mode. 🤓
+Investing in learning Docker Swarm, will allow you to lean the same concepts, that you can later apply if you are using Kubernetes, so I think it is something worth it.
 
 ## History
 
@@ -28,6 +14,4 @@ Docker, Inc., the company, created Docker Swarm Mode, it was integrated in Docke
 
 At some point, Docker, Inc. decided to shift focus to Docker Desktop and other products. They sold all the Docker Swarm Mode side to Mirantis, Inc. that inherited the enterprise clients. And now [Docker Swarm Mode is a Mirantis product under their Kubernetes engine](https://www.mirantis.com/software/swarm/).
 
-As someone looking from the outside, it seems Mirantis bought it to continue providing the enterprise support for the existing clients while probably helping them migrate to Kubernetes.
-
-It probably wouldn't make sense to create a new project based on Docker Swarm Mode instead of Kubernetes, when the current main company behind it is seemingly also fully focused on Kubernetes.
+Mirantis has said, that [Docker Swarm is here to stay](https://www.mirantis.com/blog/swarm-is-here-to-stay-and-keeps-getting-better-in-security-and-ease-of-operations/) which to me sounds better than _"life-long support"_ 😁
