@@ -19,6 +19,8 @@ on:
         required: true
       DOCKER_SWARM_MANAGER_HOST:
         required: true
+      DOCKER_SWARM_MANAGER_USER:
+        required: true
 
 permissions:
   deployments: write
@@ -41,7 +43,7 @@ jobs:
           ssh-keyscan -H "${{ secrets.DOCKER_SWARM_MANAGER_HOST }}" >> ~/.ssh/known_hosts
 
       - name: Set DOCKER_HOST env
-        run: echo "DOCKER_HOST=ssh://${{ secrets.DOCKER_SWARM_MANAGER_HOST }}" >> $GITHUB_ENV
+        run: echo "DOCKER_HOST=ssh://${{ secrets.DOCKER_SWARM_MANAGER_USER }}@${{ secrets.DOCKER_SWARM_MANAGER_HOST }}" >> $GITHUB_ENV
 
       - name: Login to GitHub Container Registry on remote host
         run: |
