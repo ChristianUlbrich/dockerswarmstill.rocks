@@ -7,9 +7,36 @@ on:
     tags:
       - '*'
 
+
 jobs:
+  check-branch:
+    runs-on: ubuntu-latest
+    outputs:
+      on-master: ${{ steps.check.outputs.on-master }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Fetch all branches
+        run: git fetch --all
+      - name: Check if tag is on master
+        id: check
+        run: |
+          # Get the commit that the tag points to
+          TAG_COMMIT=$(git rev-list -n 1 ${{ github.ref_name }})
+
+          # Check if this commit is part of the master branch
+          if git merge-base --is-ancestor $TAG_COMMIT origin/master; then
+            echo "on-master=true" >> $GITHUB_OUTPUT
+          else
+            echo "on-master=false" >> $GITHUB_OUTPUT
+          fi
+
   get-latest-tag:
     runs-on: ubuntu-latest
+    needs: check-branch
+    if: needs.check-branch.outputs.on-master == 'true'
     outputs:
       tag: ${{ steps.get-tag.outputs.tag }}
     steps:
