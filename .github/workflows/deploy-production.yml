@@ -7,11 +7,6 @@ on:
     tags:
       - '*'
 
-permissions:
-  deployments: write
-  contents: read
-  packages: write
-
 jobs:
   get-latest-tag:
     runs-on: ubuntu-latest

@@ -22,6 +22,8 @@ on:
 
 permissions:
   deployments: write
+  contents: read
+  packages: read
 
 jobs:
   deploy:
