@@ -1,5 +1,11 @@
 # Traefik Proxy with HTTPS
 
+/// note
+
+🦄🦄🦄 **THIS IS CURRENTLY OUTDATED AND WILL BE ADJUSTED SOON, STAY TUNED!** 🦄🦄🦄
+
+///
+
 ## Note - version 2 (and v3)
 
 This guide is updated for Traefik version 2 and version 3. ✨

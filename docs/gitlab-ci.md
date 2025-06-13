@@ -1,4 +1,9 @@
 # GitLab CI runner for CI/CD
+/// note
+
+🦄🦄🦄 **THIS IS CURRENTLY OUTDATED AND WILL BE ADJUSTED SOON, STAY TUNED!** 🦄🦄🦄
+
+///
 
 <a href="https://about.gitlab.com/" target="_blank">GitLab</a> is an open source Git code management system, similar to GitHub and Bitbucket.
 

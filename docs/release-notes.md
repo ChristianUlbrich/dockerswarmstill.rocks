@@ -1,4 +1,9 @@
 # Release Notes
+/// note
+
+🦄🦄🦄 **THIS IS CURRENTLY OUTDATED AND WILL BE ADJUSTED SOON, STAY TUNED!** 🦄🦄🦄
+
+///
 
 ## Latest Changes
 
