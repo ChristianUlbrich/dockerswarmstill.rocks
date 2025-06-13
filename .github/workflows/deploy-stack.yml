@@ -35,6 +35,8 @@ jobs:
       url: ${{ inputs.deployUrl }}
 
     steps:
+      # -> https://maxschmitt.me/posts/github-actions-ssh-key
+      # this is not done, with an action, because this is a security risk
       - name: Set up SSH key for Docker Swarm Manager host
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
@@ -62,4 +64,4 @@ jobs:
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
-          docker stack deploy -c docker-compose.yml ${{ inputs.stack }}
+          VERSION=${{ inputs.version }} docker stack deploy -c docker-compose.yml ${{ inputs.stack }}

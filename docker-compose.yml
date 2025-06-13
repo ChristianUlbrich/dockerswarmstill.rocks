@@ -1,6 +1,6 @@
 services:
   builder:
-    image: ghcr.io/christianulbrich/dockerswarmstillrocks-builder:latest
+    image: ghcr.io/christianulbrich/dockerswarmstillrocks-builder:${VERSION:-latest}
     build:
       dockerfile: builder.Dockerfile
       context: .

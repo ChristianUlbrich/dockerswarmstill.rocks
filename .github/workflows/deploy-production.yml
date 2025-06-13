@@ -2,11 +2,8 @@ name: Deploy Production
 
 on:
   push:
-    branches:
-      - master
-#TODO: rmv for prod
-#    tags:
-#      - '*'
+    tags:
+      - '*'
 
 
 jobs:
