@@ -45,8 +45,14 @@ jobs:
       - name: Set DOCKER_HOST env
         run: echo "DOCKER_HOST=ssh://${{ secrets.DOCKER_SWARM_MANAGER_USER }}@${{ secrets.DOCKER_SWARM_MANAGER_HOST }}" >> $GITHUB_ENV
 
+      - name: Debug SSH connection
+        run: |
+          echo $DOCKER_HOST
+          docker version
+
       - name: Login to GitHub Container Registry on remote host
         run: |
+          echo $DOCKER_HOST
           docker login ghcr.io -u ${{ github.repository_owner }} -p ${{ secrets.GITHUB_TOKEN }}
 
       - name: Checkout Code
@@ -54,4 +60,5 @@ jobs:
 
       - name: Docker stack deploy on remote host
         run: |
+          echo $DOCKER_HOST
           docker stack deploy -c docker-compose.yml ${{ inputs.stack }}
