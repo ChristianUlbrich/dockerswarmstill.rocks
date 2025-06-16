@@ -1,0 +1,40 @@
+http:
+# define global routers, that use global services
+# see -> https://doc.traefik.io/traefik/reference/install-configuration/providers/others/file/
+  routers:
+    traefik-dashboard:
+      rule: "Host(`$DOMAIN_TRAEFIK_DASHBOARD`)"
+      service: "dashboard@internal"
+      entryPoints:
+        - http
+        - https
+      middlewares:
+        - admin-basic-auth
+        - https-redirect
+      tls: {}
+    traefik-api:
+      rule: "Host(`$DOMAIN_TRAEFIK_DASHBOARD`) && PathPrefix(`/api`)"
+      service: "api@internal"
+      entryPoints:
+        - http
+        - https
+      middlewares:
+        - admin-basic-auth
+        - https-redirect
+      tls: {}
+
+  # global middlewares, that can be re-used
+  middlewares:
+    https-redirect:
+      redirectScheme:
+        scheme: https
+        permanent: true
+    admin-basic-auth:
+      basicAuth:
+        users:
+          # this must be replaced via envsubst or similar
+          # or use docker compose run --rm envsubst to stamp it
+          - "admin:$ADMIN_HASHED_PASSWORD"
+
+# global routers use global services
+#  services:

@@ -1,0 +1,40 @@
+api:
+  insecure: true
+  dashboard: true
+#  debug: true
+
+log:
+  level: ERROR
+
+accessLog: {}
+
+# uncomment to enable prometheus export
+# -> https://doc.traefik.io/traefik/observability/metrics/prometheus/
+#metrics:
+#  prometheus: {}
+
+entryPoints:
+  http:
+    address: :80
+  https:
+    address: :443
+
+
+certificatesResolvers:
+  letsencrypt:
+    acme:
+# this must be replaced via envsubst or similar
+# or use docker compose run --rm envsubst to stamp it
+      email: $DOMAIN_EMAIL
+      storage: /letsencrypt/acme.json
+      tlsChallenge: {}
+#         uncomment for testing against staging...
+#      caServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
+
+providers:
+  file:
+    filename: /etc/traefik/services.yml
+    watch: true
+  docker:
+    exposedByDefault: false
+    swarmMode: true

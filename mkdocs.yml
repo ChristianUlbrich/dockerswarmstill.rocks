@@ -62,7 +62,7 @@ plugins:
 nav:
     - Docker Swarm Still Rocks: index.md
     - swarm-or-kubernetes.md
-    - traefik.md
+    - stacks/traefik/README.md
     - portainer.md
     - gitlab-ci.md
     - release-notes.md

@@ -1,0 +1,92 @@
+configs:
+  services-yml:
+    file: ./services.yml
+  traefik-yml:
+    file: ./traefik.yml
+
+
+services:
+
+# this is a small helper for stamping .yml files
+  envsubst:
+    image: ubuntu:latest
+    build:
+      dockerfile_inline: |
+        FROM ubuntu:latest
+        RUN apt update && apt install gettext -y
+    entrypoint:
+      - /bin/bash
+      - -c
+      - |
+        set -eo pipefail
+        envsubst < /mnt/traefik.yml > /tmp/traefik.new.yml && mv /tmp/traefik.new.yml /mnt/traefik.yml
+        envsubst < /mnt/services.yml > /tmp/services.new.yml && mv /tmp/services.new.yml /mnt/services.yml
+    # small hack to prevent it from deploying
+    deploy:
+      replicas: 0
+    environment:
+      - DOMAIN_EMAIL=${DOMAIN_EMAIL}
+      - ADMIN_HASHED_PASSWORD=${ADMIN_HASHED_PASSWORD}
+      - DOMAIN_TRAEFIK_DASHBOARD=${DOMAIN_TRAEFIK_DASHBOARD}
+    volumes:
+      - ./:/mnt
+    networks:
+      - traefik-public
+
+  reverse-proxy:
+    image: traefik:v2.4
+    configs:
+      - source: services-yml
+        target: /etc/traefik/services.yml
+      - source: traefik-yml
+        target: /etc/traefik/traefik.yml
+    deploy:
+        placement:
+            constraints:
+            - node.role == manager
+    ports:
+      # The HTTP port
+      - "80:80"
+      # HTTPS also
+      - "443:443"
+      # The Web UI (enabled by --api.insecure=true)
+      - "8080:8080"
+    volumes:
+      # Add Docker socket as a mounted volume, so that Traefik can read the labels of other services
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      # acme.json for le challenges
+      - acme-data:/letsencrypt
+    networks:
+      - traefik-public
+
+# comment the following if you do not want to use the example whoami service
+  whoami:
+    # A container that exposes an API to show its IP address
+    image: traefik/whoami:latest
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=traefik-public"
+        # explicit http entrypoint
+        - "traefik.http.routers.whoami-http.rule=Host(`${DOMAIN_WHOAMI}`)"
+        - "traefik.http.routers.whoami-http.entrypoints=http"
+        - "traefik.http.routers.whoami-http.service=whoamiService"
+        - "traefik.http.services.whoamiService.loadbalancer.server.port=80"
+        # https entrypoint
+        - "traefik.http.routers.whoami-https.rule=Host(`${DOMAIN_WHOAMI}`)"
+        - "traefik.http.routers.whoami-https.entrypoints=https"
+        - "traefik.http.routers.whoami-https.tls=true"
+        # explicitly use le as certresolver
+        - "traefik.http.routers.whoami-https.tls.certresolver=letsencrypt"
+        - "traefik.http.routers.whoami-https.service=whoamiHttpsService"
+        - "traefik.http.services.whoamiHttpsService.loadbalancer.server.port=80"
+    networks:
+      - traefik-public
+
+volumes:
+  acme-data:
+
+networks:
+  # N.B. this must be created once on a manager node (e.g. docker network create --driver=overlay traefik-public)
+  traefik-public:
+    external: true
