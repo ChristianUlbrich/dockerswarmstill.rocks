@@ -1,0 +1,20 @@
+services:
+  # this is a small helper for stamping .yml files
+  envsubst:
+    build:
+      dockerfile_inline: |
+        FROM ubuntu:latest
+        RUN apt update && apt install gettext -y
+    entrypoint:
+      - /bin/bash
+      - -c
+      - |
+        set -eo pipefail
+        envsubst < /mnt/traefik.yml > /tmp/traefik.new.yml && mv /tmp/traefik.new.yml /mnt/traefik.yml
+        envsubst < /mnt/services.yml > /tmp/services.new.yml && mv /tmp/services.new.yml /mnt/services.yml
+    environment:
+      - DOMAIN_EMAIL=${DOMAIN_EMAIL}
+      - ADMIN_HASHED_PASSWORD=${ADMIN_HASHED_PASSWORD}
+      - DOMAIN_TRAEFIK_DASHBOARD=${DOMAIN_TRAEFIK_DASHBOARD}
+    volumes:
+      - ./:/mnt

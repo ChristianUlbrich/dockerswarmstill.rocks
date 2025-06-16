@@ -75,6 +75,7 @@ export DOMAIN_EMAIL=admin@example.org
 curl -L dockerswarmstill.rocks/stacks/traefik/services.yml -o services.yml
 curl -L dockerswarmstill.rocks/stacks/traefik/traefik.yml -o traefik.yml
 curl -L dockerswarmstill.rocks/stacks/traefik/docker-compose.yml -o docker-compose.yml
+curl -L dockerswarmstill.rocks/stacks/traefik/docker-compose.override.yml -o docker-compose.override.yml
 ```
 
 * **Configure** Traefik itself and either replace `$DOMAIN_EMAIL` with the email address you exported above:
@@ -86,8 +87,10 @@ or stamp it into it with:
 docker context use desktop-linux
 docker compose run --rm envsubst
 ```
-
 > **Tip:** Your "local" Docker context might have a different name.
+> 
+> **Tip:** If you get an error message, make sure, that you have also downloaded the `docker-compose.override.yml` file, as it contains the envsubst helper service.
+
 
 * **Configure** the file provider with its global middleware and the dashboard, either replace `$HASHED_PASSWORD` with the password you generated above and replace `$DOMAIN_TRAEFIK_DASHBOARD` with the domain you want to use for the Traefik _Dashboard_ (e.g. `traefik.on.dockerswarmstill.rocks`):
 ```YAML
