@@ -51,7 +51,7 @@ nslookup whoami.on.dockerswarmstill.rocks
 * Create a network that will be shared with Traefik and the containers that should be accessible from the outside, with:
 
 ```bash
-docker context use dockerswarstillrocks
+docker context use dockerswarmstillrocks
 docker network create --driver=overlay traefik-public
 ```
 
@@ -120,7 +120,7 @@ The file without comments is actually quite smaller, but the comments should giv
 Deploy the stack with:
 
 ```bash
-docker context use dockerswarstillrocks
+docker context use dockerswarmstillrocks
 docker stack deploy -c docker-compose.yml traefik
 ```
 > **Tip:** Make sure, you are controlling your Docker Swarm manager.
