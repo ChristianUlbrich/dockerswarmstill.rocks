@@ -10,7 +10,7 @@
 
 **This website is undeprecated.**
 
-It has been updated with some current recipes, because _Docker Swarm still rocks_. :)
+It has been updated with some current recipes, because _Docker Swarm still rocks_. 😎
 
 See [Docker Swarm Mode or Kubernetes](swarm-or-kubernetes.md) for more information.
 
@@ -60,13 +60,15 @@ To use any of them you need to learn a huge new set of concepts, configurations,
 
 Docker Swarm mode is comparable to them.
 
-But it, with all the ideas described here, is what I would recommend for teams of **less than 200 developers**, or clusters of **less than 1000 machines**.
+But it has simpler concepts and its requirements are very low. You can easily set it up on any VPS running Docker.
 
-This includes **small / medium size organizations** (like when you are not Google or Amazon), **startups**, one-man projects, and "hobby" projects.
+Take things back into your own hands! Docker Swarm is a very good fit, if you _just want to deploy_ some containers.
 
 Try it.
 
-Set up a distributed cluster ready for production.
+Set up a distributed cluster ready for "production".
+
+> **Hint:** Distributed cluster, does not mean _high availability_.
 
 ...In about **20 minutes**.
 
@@ -110,7 +112,6 @@ Huge thanks to [@tiangolo](https://github.com/tiangolo) who originally created [
 * install latest [Docker](https://docs.docker.com/install/) on it, _Community Edition_ suffices
 > **Tip:** You can do this easily by using [Ansible](https://docs.ansible.com/).
 * Get either a brand-new _domain_ that still rocks (e.g. `dockerswarmstill.rocks`) or have a subdomain resolve to `your-cheapo-vps-ip` (e.g. `168.119.115.151`).
-> **Tip:** Make sure, that you create both an A and an AAAA record. R.I.P. IpV4.
 
 That's basically the only you ever do, directly on your VPS (apart from updates, of course!).
 
@@ -281,4 +282,3 @@ Check other sections in the documentation at [https://dockerswarmstill.rocks](ht
 You already did the hard part, the rest is easy(TM).
 
 > **Bonus:** This website itself is hosted via Docker Swarm and build, deployed via [GitHub actions](https://github.com/ChristianUlbrich/dockerswarmstill.rocks/tree/master/.github/workflows), from a **single** [docker-compose.yml](https://github.com/ChristianUlbrich/dockerswarmstill.rocks/blob/master/docker-compose.yml) if you are a little bit impatient (and still managed to read until the very end!)
-

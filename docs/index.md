@@ -112,7 +112,6 @@ Huge thanks to [@tiangolo](https://github.com/tiangolo) who originally created [
 * install latest [Docker](https://docs.docker.com/install/) on it, _Community Edition_ suffices
 > **Tip:** You can do this easily by using [Ansible](https://docs.ansible.com/).
 * Get either a brand-new _domain_ that still rocks (e.g. `dockerswarmstill.rocks`) or have a subdomain resolve to `your-cheapo-vps-ip` (e.g. `168.119.115.151`).
-> **Tip:** Make sure, that you create both an A and an AAAA record. R.I.P. IpV4.
 
 That's basically the only you ever do, directly on your VPS (apart from updates, of course!).
 
@@ -283,4 +282,3 @@ Check other sections in the documentation at [https://dockerswarmstill.rocks](ht
 You already did the hard part, the rest is easy(TM).
 
 > **Bonus:** This website itself is hosted via Docker Swarm and build, deployed via [GitHub actions](https://github.com/ChristianUlbrich/dockerswarmstill.rocks/tree/master/.github/workflows), from a **single** [docker-compose.yml](https://github.com/ChristianUlbrich/dockerswarmstill.rocks/blob/master/docker-compose.yml) if you are a little bit impatient (and still managed to read until the very end!)
-
