@@ -22,6 +22,8 @@ services:
       context: .
       platforms:
         - 'linux/arm64'
+      args:
+        - VERSION=${VERSION:-latest}
     deploy:
       labels:
         - "traefik.enable=true"

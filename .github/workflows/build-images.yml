@@ -35,11 +35,13 @@ jobs:
 
       - name: Build Docker images
         run: |
-          VERSION=${{ inputs.version }} docker compose build
+          VERSION=${{ inputs.version }} docker compose build --no-cache
+          VERSION=latest docker compose build
 
       - name: Push Docker images
         run: |
           VERSION=${{ inputs.version }} docker compose push
+          VERSION=latest docker compose push
         
       
       
