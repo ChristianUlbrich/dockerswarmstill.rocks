@@ -92,26 +92,30 @@ docker compose run --rm envsubst
 > **Tip:** If you get an error message, make sure, that you have also downloaded the `docker-compose.override.yml` file, as it contains the envsubst helper service.
 
 
-* **Configure** the file provider with its global middleware and the dashboard, either replace `$HASHED_PASSWORD` with the password you generated above and replace `$DOMAIN_TRAEFIK_DASHBOARD` with the domain you want to use for the Traefik _Dashboard_ (e.g. `traefik.on.dockerswarmstill.rocks`):
+* **Configure** the file provider with its global middleware and the dashboard, either replace `$HASHED_PASSWORD` with the (hashed) password you generated above and replace `$DOMAIN_TRAEFIK_DASHBOARD` with the domain you want to use for the Traefik _Dashboard_ (e.g. `traefik.on.dockerswarmstill.rocks`):
 ```YAML
 {!./docs/stacks/traefik/services.yml!}
 ```
-or stamp it (_locally_) into it with:
+or export and stamp it (_locally_) into it with:
 ```bash
+export DOMAIN_TRAEFIK_DASHBOARD=traefik.on.dockerswarmstill.rocks
 docker compose run --rm envsubst
 ```
 
-* and _finally_ **configure** the Traefik stack itself, either replace `$DOMAIN_WHOAMI` with the domain you want to use for the whoami _service_ (e.g. `whoami.on.dockerswarmstill.rocks`) or export it as an environment variable:
-
+* and _finally_ **configure** the Traefik stack itself, either replace `$DOMAIN_WHOAMI` with the domain you want to use for the whoami _service_ (e.g. `whoami.on.dockerswarmstill.rocks`):
 ```YAML
 {!./docs/stacks/traefik/docker-compose.yml!}
 ```
+or export it as an environment variable:
+```bash
+export DOMAIN_WHOAMI=whoami.on.dockerswarmstill.rocks
+```
+
+> **Tip:** The whoami _service_ is merely for demonstrating proper usage of Traefik, if you do not want to deploy it anymore, simply remove or comment out the `whoami` service in the `docker-compose.yml` file.
 
 /// tip
 
 Read the internal comments to learn what each configuration is for.
-
-The file without comments is actually quite smaller, but the comments should give you an idea of what everything is doing.
 
 ///
 
@@ -151,11 +155,17 @@ docker service logs traefik_reverse-proxy
 
 After some seconds/minutes, Traefik will acquire the HTTPS certificates for the web user interface (UI).
 
-You will be able to securely access the web UI at `https://traefik.<your domain>` using the created username and password.
+You will be able to securely access the web UI at `https://$DOMAIN_TRAEFIK_DASHBOARD` (e.g. [https://traefik.on.dockerswarmstill.rocks](https://traefik.on.dockerswarmstill.rocks)) using the username `admin` and the created password (a pity `password-is-a-bad-password` does not work, isn't it?).
 
 Once you deploy a stack, you will be able to see it there and see how the different hosts and paths map to different Docker services / containers.
 
-## Getting the client IP
+If you have also deployed the `whoami` service, you will be able to access it at `https://$DOMAIN_WHOAMI` (e.g. [https://whoami.on.dockerswarmstill.rocks](https://whoami.on.dockerswarmstill.rocks)).
+
+
+
+## Advanced usage
+
+### Getting the client IP
 
 If you need to read the client IP in your applications/stacks using the `X-Forwarded-For` or `X-Real-IP` headers provided by Traefik, you need to make Traefik listen directly, not through Docker Swarm mode, even while being deployed with Docker Swarm mode.
 

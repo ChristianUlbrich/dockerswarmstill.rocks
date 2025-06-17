@@ -11,7 +11,8 @@ http:
       middlewares:
         - admin-basic-auth
         - https-redirect
-      tls: {}
+      tls:
+        certResolver: letsencrypt
     traefik-api:
       rule: "Host(`$DOMAIN_TRAEFIK_DASHBOARD`) && PathPrefix(`/api`)"
       service: "api@internal"
@@ -21,7 +22,8 @@ http:
       middlewares:
         - admin-basic-auth
         - https-redirect
-      tls: {}
+      tls:
+        certResolver: letsencrypt
 
   # global middlewares, that can be re-used
   middlewares:
