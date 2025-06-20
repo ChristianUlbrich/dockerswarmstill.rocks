@@ -63,6 +63,7 @@ nav:
     - Docker Swarm Still Rocks: index.md
     - swarm-or-kubernetes.md
     - stacks/traefik/README.md
+    - stacks/wireguard/README.md
     - portainer.md
     - gitlab-ci.md
     - release-notes.md
