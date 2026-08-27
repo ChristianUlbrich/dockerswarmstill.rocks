@@ -66,6 +66,12 @@ nav:
     - stacks/wireguard/README.md
     - portainer.md
     - gitlab-ci.md
+    - SwarmCLI ecosystem:
+      - Overview: swarmcli.md
+      - SwarmCLI: swarmcli/swarmcli.md
+      - RBAC proxy: swarmcli/rbac-proxy.md
+      - CD: swarmcli/cd.md
+      - Charts: swarmcli/charts.md
     - release-notes.md
 
 markdown_extensions:

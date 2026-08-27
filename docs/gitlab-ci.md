@@ -5,6 +5,29 @@
 
 ///
 
+## Install GitLab on-premises with SwarmCLI Charts
+
+You can install the self-hosted GitLab CE stack directly on your Docker Swarm with the [SwarmCLI Charts](swarmcli/charts.md) repository. The chart runs GitLab as a single-replica, single-node deployment with persistent local volumes and Traefik at the edge.
+
+First label the Swarm node that will hold GitLab's data and make sure the `traefik-public` overlay network exists:
+
+```bash
+docker node update --label-add gitlab-data=true <node>
+docker network create --driver=overlay --attachable traefik-public
+```
+
+Then register the chart repository and install GitLab with its public hostname:
+
+```bash
+swarmcli charts repo add swarmcli-charts \
+  https://eldara-tech.github.io/swarmcli-charts
+swarmcli charts repo update
+swarmcli charts install gitlab swarmcli-charts/gitlab \
+  --set ingress.host=gitlab.example.com
+```
+
+The default configuration routes HTTPS and Git over SSH through Traefik. Configure the Traefik SSH entrypoint before installing, and review the chart's [prerequisites, persistence, and values](https://github.com/Eldara-Tech/swarmcli-charts/tree/main/charts/gitlab) for root-password secrets, SMTP, backups, resource sizing, and first-boot behavior. GitLab is resource-intensive and its initial startup can take several minutes.
+
 <a href="https://about.gitlab.com/" target="_blank">GitLab</a> is an open source Git code management system, similar to GitHub and Bitbucket.
 
 It has integrated CI/CD (continuous integration and continuous deployment).

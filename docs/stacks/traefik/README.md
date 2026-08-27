@@ -190,3 +190,18 @@ need to be:
         published: 443
         mode: host
 ```
+
+## Alternative deployment with SwarmCLI Charts
+
+Instead of deploying the Compose files described above, you can install Traefik from the [SwarmCLI Charts](../../swarmcli/charts.md) repository. The chart configures Traefik for Docker Swarm and requires a dashboard hostname and email address for Let's Encrypt:
+
+```bash
+swarmcli charts repo add swarmcli-charts \
+  https://eldara-tech.github.io/swarmcli-charts
+swarmcli charts repo update
+swarmcli charts install traefik swarmcli-charts/traefik \
+  --set traefik.dashboard.host=traefik.example.com \
+  --set traefik.acme.email=admin@example.com
+```
+
+For dashboard Basic Auth, add `--set traefik.dashboard.basicAuthUsers='admin:$$apr1$$....'` with an htpasswd hash. Review the chart's [requirements, values, and routing configuration](https://github.com/Eldara-Tech/swarmcli-charts/tree/main/charts/traefik) before deploying it in production.
